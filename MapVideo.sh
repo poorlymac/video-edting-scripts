@@ -5,7 +5,7 @@ function animate() {
 		--input  MP4GPS/${NAME}.gpx \
 		--color "#15337f" \
 		--forced-point-time-interval 1000 \
-		--label "Paul & Sally Suzuki Bandit 1250" \
+		--label "$1" \
 		--background-map-visibility 0.5 \
 		--attribution "" \
 		--width 640 \
@@ -36,6 +36,6 @@ do
 	NAME=$(basename $NMEA | sed 's/\.[^.]*$//')
 	LEN=$(ffprobe -hide_banner -v quiet -show_streams -print_format flat MP4GPS/$NAME.mp4 | grep "0.duration=" | awk -F\" '{print $2*1000}')
 	echo "Processing $NAME -> $LEN"
-	animate
+	animate "$1"
 	overlay
 done
